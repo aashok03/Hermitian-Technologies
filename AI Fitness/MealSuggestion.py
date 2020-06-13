@@ -9,8 +9,8 @@ def suggestedIntake(weight, BMR, goal, ECB):
 		caloricIntake = 0.85*caloricOutput
 	elif goal == 1:	
 		caloricIntake = caloricOutput
-    elif goal == 2:
-    	caloricIntake = 1.15*caloricOutput
+        elif goal == 2:
+    		caloricIntake = 1.15*caloricOutput
     proteinCalories = 0.18*caloricIntake 
     protein = proteinCalories/4
     carbCalories = 0.55*caloricIntake
