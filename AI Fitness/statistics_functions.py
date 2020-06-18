@@ -1,4 +1,3 @@
-from tabulate import tabulate
 
 #--------------------Unit Conversions--------------------
 
@@ -107,3 +106,74 @@ def calc_FM_LM_hume (weight_kg, height_m, gender):
 		LM = 0.29569 * weight_kg + 0.41813 * height_m * 100- 43.2933
 		FM = weight_kg - LM
 		return FM, LM
+
+
+#--------------------Macros Calculators--------------------
+
+
+'''
+Calculate caloric intake based on BMR, goal, and ECB
+
+Goal:  0 --> Lose weight
+	   1 --> Keep weight
+	   2 --> Gain weight
+'''
+def get_caloric_intake_percentages(BMR, goal, ECB):
+	
+	caloricOutput = BMR + ECB
+	
+	if goal == 0:
+		caloricIntake = 0.85 * caloricOutput
+	
+	elif goal == 1:	
+		caloricIntake = caloricOutput
+        
+	elif goal == 2:
+    		caloricIntake = 1.15 * caloricOutput  
+
+    return caloricOutput
+
+
+'''
+Calculate caloric intake based on BMR, activity levels, and weight goal
+
+Goal: -3 --> Lose 2 lb / week
+	  -2 --> Lose 1 lb / week 
+	  -1 --> Lose 0.5 lb / week
+	   0 --> Keep weight
+	   1 --> Gain 0.5 lb / week
+	   2 --> Gain 1 lb / week
+
+Activity : Factor of 1.2 - 1.9
+'''
+def get_caloric_intake_activity(BMR, activity, goal):
+	
+	calories_burned = BMR * activity
+
+	if goal == -3:
+		calories_burned = calories_burned - 1000
+	elif goal == -2:
+		calories_burned = calories_burned - 500
+	elif goal == -1:
+		calories_burned = calories_burned - 250
+	elif goal == 1:
+		calories_burned = calories_burned + 250
+	elif goal == 2:
+		calories_burned = calories_burned + 500
+
+	return calories_burned
+
+
+#Return grams of protein, fat, and carbs based on caloric intake
+def get_macros (caloricIntake)
+		
+	proteinCalories = 0.18 * caloricIntake 
+    protein = proteinCalories/4
+	
+	carbCalories = 0.55 * caloricIntake
+	carbs = carbCalories / 4
+	
+	fatCalories = 0.27 * caloricIntake
+	fat = fatCalories / 5
+    
+    return [protein, carbs, fat] 
