@@ -129,46 +129,29 @@ def get_caloric_intake_percentages(BMR, goal, ECB):
 		caloricIntake = caloricOutput
         
 	elif goal == 2:
-    		caloricIntake = 1.15 * caloricOutput  
+		caloricIntake = 1.15 * caloricOutput  
 
-    return caloricOutput
-
+	return caloricOutput
 
 '''
 Calculate caloric intake based on BMR, activity levels, and weight goal
 
-Goal: -3 --> Lose 2 lb / week
-	  -2 --> Lose 1 lb / week 
-	  -1 --> Lose 0.5 lb / week
-	   0 --> Keep weight
-	   1 --> Gain 0.5 lb / week
-	   2 --> Gain 1 lb / week
-
-Activity : Factor of 1.2 - 1.9
+Goal: Any float between -2 and +2 (which indicates lb/week gain or loss)
+Activity: Factor of 1 - 1.9 based on how much exercises is done daily
 '''
 def get_caloric_intake_activity(BMR, activity, goal):
 	
 	calories_burned = BMR * activity
+	caloric_intake = calories_burned + (goal * 500)
 
-	if goal == -3:
-		calories_burned = calories_burned - 1000
-	elif goal == -2:
-		calories_burned = calories_burned - 500
-	elif goal == -1:
-		calories_burned = calories_burned - 250
-	elif goal == 1:
-		calories_burned = calories_burned + 250
-	elif goal == 2:
-		calories_burned = calories_burned + 500
-
-	return calories_burned
+	return caloric_intake
 
 
 #Return grams of protein, fat, and carbs based on caloric intake
-def get_macros (caloricIntake)
+def get_macros (caloricIntake):
 		
 	proteinCalories = 0.18 * caloricIntake 
-    protein = proteinCalories/4
+	protein = proteinCalories / 4
 	
 	carbCalories = 0.55 * caloricIntake
 	carbs = carbCalories / 4
@@ -176,4 +159,4 @@ def get_macros (caloricIntake)
 	fatCalories = 0.27 * caloricIntake
 	fat = fatCalories / 5
     
-    return [protein, carbs, fat] 
+	return [protein, carbs, fat] 
