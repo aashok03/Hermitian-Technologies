@@ -114,21 +114,21 @@ def calc_FM_LM_hume (weight_kg, height_m, gender):
 '''
 Calculate caloric intake based on BMR, goal, and ECB
 
-Goal:  0 --> Lose weight
-	   1 --> Keep weight
-	   2 --> Gain weight
+Goal:  -1 --> Lose weight
+	   0 --> Keep weight
+	   1 --> Gain weight
 '''
 def get_caloric_intake_percentages(BMR, goal, ECB):
 	
 	caloricOutput = BMR + ECB
 	
-	if goal == 0:
+	if goal == -1:
 		caloricIntake = 0.85 * caloricOutput
 	
-	elif goal == 1:	
+	elif goal == 0:	
 		caloricIntake = caloricOutput
         
-	elif goal == 2:
+	elif goal == 1:
 		caloricIntake = 1.15 * caloricOutput  
 
 	return caloricOutput
@@ -139,10 +139,10 @@ Calculate caloric intake based on BMR, activity levels, and weight goal
 Goal: Any float between -2 and +2 (which indicates lb/week gain or loss)
 Activity: Factor of 1 - 1.9 based on how much exercises is done daily
 '''
-def get_caloric_intake_activity(BMR, activity, goal):
+def get_caloric_intake_activity(BMR, activity_level, weight_rate_goal):
 	
-	calories_burned = BMR * activity
-	caloric_intake = calories_burned + (goal * 500)
+	calories_burned = BMR * activity_level
+	caloric_intake = calories_burned + (weight_rate_goal * 500)
 
 	return caloric_intake
 
